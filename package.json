@@ -1,0 +1,48 @@
+{
+  "name": "typhonjs-ast-walker",
+  "version": "0.1.0",
+  "homepage": "https://github.com/typhonjs-node-ast/typhonjs-ast-walker/",
+  "description": "Provides basic iteration through all nodes and children for Javascript AST trees.",
+  "license": "MPL-2.0",
+  "main": "./dist",
+  "author": {
+    "name": "Mike Leahy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/typhonjs-node-ast/typhonjs-ast-walker.git"
+  },
+  "maintainers": [
+    {
+      "name": "Mike Leahy",
+      "email": "support@typhonjs.io"
+    }
+  ],
+  "devDependencies": {
+    "babel-plugin-add-module-exports": "^0.2.0",
+    "typhonjs-config-eslint": "^0.4.0",
+    "typhonjs-npm-build-test": "^0.1.0"
+  },
+  "scripts": {
+    "build": "babel-node ./node_modules/typhonjs-npm-scripts-build-babel/scripts/build.js",
+    "esdoc": "esdoc -c .esdocrc",
+    "eslint": "eslint .",
+    "prepublish": "babel-node ./node_modules/typhonjs-npm-scripts-publish/scripts/prepublish.js",
+    "test": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha.js",
+    "test-coverage": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js"
+  },
+  "keywords": [
+    "typhonjs",
+    "ast",
+    "traversal"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "AUTHORS.md"
+  ],
+  "directories": {},
+  "bugs": {
+    "url": "https://github.com/typhonjs-node-ast/typhonjs-ast-walker/issues"
+  }
+}

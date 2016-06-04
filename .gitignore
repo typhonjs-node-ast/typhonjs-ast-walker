@@ -3,4 +3,5 @@
 npm-debug.log
 coverage/
 docs/
+dist/
 node_modules/

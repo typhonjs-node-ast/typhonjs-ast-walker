@@ -1,14 +1,21 @@
 'use strict';
 
 /**
- * ASTWalker -
+ * ASTWalker - Provides a simple AST traversal utility that traverses all nodes / children regardless of type.
+ *
+ * A callback object is provided in `traverse` which may contain two methods `enterNode` and `exitNode` which are
+ * invoked with the current node and the parent node respectively when entering and exiting a given node.
+ *
+ * `enterNode` may return a array of strings which provide a set of children keys to ignore.
+ *
+ * `enterNode` may also return null to skip traversing children keys entirely.
  */
 export default class ASTWalker
 {
    /**
     * Traverses the ast tree provided and invokes `callbacks.enterNode` / `callbacks.exitNode`
     *
-    * @param {object|Array}   ast -
+    * @param {object|Array}   ast - An AST Tree object hash or an array of nodes.
     * @param {object}         callbacks - An object hash containing a function for `enterNode` and / or `exitNode` keys.
     */
    traverse(ast, callbacks)
@@ -36,7 +43,10 @@ export default class ASTWalker
    /**
     * Performs the main node visit invoking the callbacks for entering / exiting the node.
     *
-    * @param {object}   node -
+    * `enterNode` may return an array of strings indicating children keys to ignore / skip. If `enterNode` returns
+    * `null` children nodes are skipped entirely.
+    *
+    * @param {object}   node - AST node being visited.
     * @param {object}   parent - The parent node.
     * @param {object}   callbacks - An object hash containing a function for `enterNode` and / or `exitNode` keys.
     *
@@ -48,7 +58,8 @@ export default class ASTWalker
       {
          const ignoreNodeKeys = typeof callbacks.enterNode === 'function' ? callbacks.enterNode(node, parent) : [];
 
-         this._visitChildren(node, ignoreNodeKeys, callbacks);
+         // If `enterNode` returns null then traversal of children is aborted.
+         if (ignoreNodeKeys !== null) { this._visitChildren(node, ignoreNodeKeys, callbacks); }
 
          if (typeof callbacks.exitNode === 'function') { callbacks.exitNode(node, parent); }
       }
@@ -57,7 +68,7 @@ export default class ASTWalker
    /**
     * Visits all nodes in the given array.
     *
-    * @param {object}   nodes -
+    * @param {Array}    nodes - An array of nodes to visit.
     * @param {object}   parent - The parent node.
     * @param {object}   callbacks - An object hash containing a function for `enterNode` and / or `exitNode` keys.
     *
@@ -71,8 +82,8 @@ export default class ASTWalker
    /**
     * Visits all children nodes from a given node.
     *
-    * @param {object}   node -
-    * @param {Array}    ignoreNodeKeys -
+    * @param {object}   node - Current AST node being visited.
+    * @param {Array}    ignoreNodeKeys - A set of keys to ignore.
     * @param {object}   callbacks - An object hash containing a function for `enterNode` and / or `exitNode` keys.
     *
     * @private
@@ -97,7 +108,7 @@ export default class ASTWalker
    /**
     * Visits all children nodes from the given child object or array.
     *
-    * @param {Array|object}   child -
+    * @param {Array|object}   child - Child key to visit.
     * @param {object}         parent - The parent node.
     * @param {object}         callbacks - An object hash containing a function for `enterNode` and / or `exitNode` keys.
     *

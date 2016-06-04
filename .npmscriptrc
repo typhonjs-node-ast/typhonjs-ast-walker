@@ -9,7 +9,7 @@
 
    "publish":
    {
-      "prepublish": { "scripts": ["npm run eslint", "npm run test", "npm run build"] }
+      "prepublish": { "scripts": ["npm run eslint", "npm run build", "npm run test"] }
    },
 
    "test":
@@ -17,7 +17,8 @@
       // Provides a `coverage` handling command that is appended when running on Travis CI.
       "travis":
       {
-         "istanbul": { "command": "cover", "options": ["--report lcovonly"] }
+         "istanbul": { "command": "cover", "options": ["--report lcovonly"] },
+         "report": "./node_modules/.bin/codecov"
       },
 
       "istanbul": { "command": "cover" },

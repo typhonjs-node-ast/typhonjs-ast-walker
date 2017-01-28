@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * ASTWalker - Provides a simple AST traversal utility that traverses all nodes / children regardless of type.
  *

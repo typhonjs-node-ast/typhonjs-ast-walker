@@ -21,7 +21,7 @@ To install `typhonjs-ast-walker` provide this entry in `package.json`:
 {
   ...
   "dependencies": {
-    "typhonjs-ast-walker": "^0.1.0"
+    "typhonjs-ast-walker": "^0.2.0"
   }
 }
 ```  
@@ -51,4 +51,35 @@ walker.traverse(ast,
    }
 });
  
+```
+
+Support for [typhonjs-plugin-manager](https://www.npmjs.com/package/typhonjs-plugin-manager) is also available and
+when loading `typhonjs-ast-walker` as a plugin it will automatically register event bindings on the plugin eventbus
+with these event categories:
+
+`ast:walker:traverse` - invokes `traverse` of the default walker.
+
+Example `typhonjs-plugin-manager` usage:
+```
+import PluginManager    from 'typhonjs-plugin-manager';
+import eventbus         from 'backbone-esnext-eventbus';
+
+const pluginManager = new PluginManager({ eventbus });
+
+pluginManager.add({ name: typhonjs-ast-walker });
+
+// This will automatically wire up typhonjs-ast-walker to the eventbus. 
+
+eventbus.trigger('ast:walker:traverse, ast, 
+{
+   enterNode: (node, parent) =>
+   {
+      console.log(`walker - enterNode: ${node.type}`);
+   },
+   
+   exitNode: (node, parent) =>
+   {
+      console.log(`walker - exitNode: ${node.type}`);
+   }
+});
 ```

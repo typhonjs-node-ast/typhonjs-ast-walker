@@ -23,7 +23,7 @@ export function onPluginLoad(ev)
 {
    const eventbus = ev.eventbus;
 
-   let eventPrepend = '';
+   let eventPrepend = 'typhonjs';
 
    const options = ev.pluginOptions;
 
@@ -34,5 +34,5 @@ export function onPluginLoad(ev)
       if (typeof options.eventPrepend === 'string') { eventPrepend = `${options.eventPrepend}:`; }
    }
 
-   eventbus.on(`${eventPrepend}ast:walker:traverse`, walker.traverse, walker);
+   eventbus.on(`${eventPrepend}:ast:walker:traverse`, walker.traverse, walker);
 }

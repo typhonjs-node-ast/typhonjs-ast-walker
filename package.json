@@ -1,6 +1,6 @@
 {
   "name": "typhonjs-ast-walker",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/typhonjs-node-ast/typhonjs-ast-walker/",
   "description": "Provides a simple Javascript AST traversal utility that traverses all nodes / children regardless of type.",
   "license": "MPL-2.0",
